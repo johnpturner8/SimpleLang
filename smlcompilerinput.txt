@@ -1,0 +1,5 @@
+10 input x
+20 input y
+30 print x
+40 print y
+50 end

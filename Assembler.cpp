@@ -30,6 +30,7 @@ int main(){
 	const int WRITE = 11;
 	const int LOAD = 20;
 	const int STORE = 21;
+	const int ACCUMULATE = 22;
 	const int ADD = 30;
 	const int SUBTRACT = 31;
 	const int DIVIDE = 32;
@@ -53,6 +54,9 @@ int main(){
 				break;
 			case STORE:
 				memory[memory[i]%100] = accumulator;
+				break;
+			case ACCUMULATE:
+				accumulator = memory[i]%100;
 				break;
 			case ADD:
 				accumulator += memory[memory[i]%100];

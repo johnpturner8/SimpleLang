@@ -56,7 +56,9 @@ int main(){
 				memory[memory[i]%100] = accumulator;
 				break;
 			case ACCUMULATE:
+				{
 				accumulator = memory[i]%100;
+				}
 				break;
 			case ADD:
 				accumulator += memory[memory[i]%100];

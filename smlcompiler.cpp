@@ -374,10 +374,6 @@ int main()
 				cerr<<"No line to goto on line "<<p1<<endl;
 				exit(EXIT_FAILURE);
 			}
-			locColumn[symbolCount] = bufferCount;
-			symbolColumn[symbolCount] = p1;
-			typeColumn[symbolCount] = "G";
-			symbolCount++;
 			if(comp == ">")
 			{
 				int ltk1 = evalExpression(toPostFix(tk1));
@@ -411,6 +407,10 @@ int main()
 				smlBuffer[bufferCount] = findSymbol(line, 4200);
 				bufferCount++;
 			}
+			locColumn[symbolCount] = bufferCount-1;
+			symbolColumn[symbolCount] = p1;
+			typeColumn[symbolCount] = "G";
+			symbolCount++;
 		}
 		else if(p2 == "let")
 		{
@@ -456,9 +456,14 @@ int main()
 	{
 		if(typeColumn[i] == "G")
 		{
+			cout<<"goto "<<smlBuffer[locColumn[i]]<<endl;
 			if(smlBuffer[locColumn[i]] < 0){
+				cout << "here"<<endl;
 				string sym = to_string((-1*smlBuffer[locColumn[i]])%100);
+				cout << sym <<endl;
+				cout << ((-1*smlBuffer[locColumn[i]])/100)*100;
 				smlBuffer[locColumn[i]] = findSymbol(sym, ((-1*smlBuffer[locColumn[i]])/100)*100);
+				cout << smlBuffer[locColumn[i]];
 				if(smlBuffer[locColumn[i]] < 0){
 					cerr << "You put a goto to an line that isn't there." << endl;
 					exit(EXIT_FAILURE);
@@ -477,7 +482,9 @@ int main()
 		cerr<<"Unable to open file."<<endl;
 		exit(EXIT_FAILURE);
 	}
-
+	for(int i = 0; i < locColumn.size(); i++){
+		cout<<typeColumn[i]<<" "<<locColumn[i]<<endl;
+	}
 	for(int i = 0; i < smlBufferSize; i++){
 		if(smlBuffer[i] == 0)
 			break;
